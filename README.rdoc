@@ -1,0 +1,34 @@
+=Flashtoggle
+
+Flash enabler / disabler for Safari on OSX.
+
+Based on a solution by John Gruber at http://daringfireball.net/2010/11/flash_free_and_cheating_with_google_chrome
+
+== Usage
+
+You'll need to call the command with the <tt>sudo</tt> command because the Flash files are located in system folders.
+
+To disabled Flash, use
+
+  sudo flashtoggle off
+
+To enable Flash, use
+
+  sudo flashtoggle on
+  
+To see if Flash is available or not,
+
+  sudo flashtoggle
+  
+  
+== What it does
+
+It simply moves the Flash plugin files into a different folder, and then moves them back when you reactivate Flash.
+
+== Version
+
+* 0.1.0 initial release.
+
+== Licence
+MIT.
+

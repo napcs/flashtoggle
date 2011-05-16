@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'flashtoggle'
+
+command = ARGV[0]
+
+puts "FlashToggle #{Flashtoggle::VERSION}"
+puts "(C) 2011 Brian P. Hogan"
+puts "------------------------------------------"
+
+plugins_dir = "/Library/Internet\ Plug-Ins"
+backup_dir = "/Library/InternetPluginsDisabled"
+
+
+toggler = Flashtoggle::Toggler.new(plugins_dir, backup_dir)
+
+case command
+when "on"
+  puts "Enabling Flash in Safari"
+  toggler.enable_flash
+when "off"
+  puts "Disabling Flash in Safari"
+  toggler.disable_flash
+when nil
+  toggler.toggle!
+end
+
+puts toggler.error if toggler.error
+
+
+def detect
+  puts "Flash is currently enabled" if toggler.flash_on?
+  puts "Flash is currently disabled" if toggler.flash_off?
+end
