@@ -20,14 +20,11 @@ when "on"
 when "off"
   puts "Disabling Flash in Safari"
   toggler.disable_flash
-when nil
+when "toggle"
   toggler.toggle!
 end
 
 puts toggler.error if toggler.error
+puts "Flash is currently enabled" if toggler.flash_on?
+puts "Flash is currently disabled" if toggler.flash_off?
 
-
-def detect
-  puts "Flash is currently enabled" if toggler.flash_on?
-  puts "Flash is currently disabled" if toggler.flash_off?
-end
