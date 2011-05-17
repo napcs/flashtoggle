@@ -3,20 +3,20 @@ require 'flashtoggle'
 
 require 'optparse'
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: flashtoggle on|off|status"  
-end.parse!
+banner = "FlashToggle #{Flashtoggle::VERSION} (C) 2011 Brian P. Hogan\n"
+banner << "-" * banner.length
+puts banner
 
+OptionParser.new do |opts|
+  opts.banner = "Usage: flashtoggle on | off | status"  
+end.parse!
 
 command = ARGV[0]
 
-puts "FlashToggle #{Flashtoggle::VERSION}"
-puts "(C) 2011 Brian P. Hogan"
-puts "------------------------------------------"
+
 
 plugins_dir = "/Library/Internet\ Plug-Ins"
 backup_dir = "/Library/InternetPluginsDisabled"
-
 
 toggler = Flashtoggle::Toggler.new(plugins_dir, backup_dir)
 
@@ -24,18 +24,19 @@ case command
 when "on"
   puts "Enabling Flash in Safari"
   toggler.enable_flash!
+  puts "Done!"
 when "off"
   puts "Disabling Flash in Safari"
   toggler.disable_flash!
+  puts "Done!"
 when "status"
   puts toggler.status
 else
   toggler.toggle!
+  puts toggler.status
 end
 
 if toggler.error
   puts toggler.error 
-else
-  puts "Done!"
 end
 
