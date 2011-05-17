@@ -16,15 +16,19 @@ toggler = Flashtoggle::Toggler.new(plugins_dir, backup_dir)
 case command
 when "on"
   puts "Enabling Flash in Safari"
-  toggler.enable_flash
+  toggler.enable_flash!
 when "off"
   puts "Disabling Flash in Safari"
-  toggler.disable_flash
-when "toggle"
+  toggler.disable_flash!
+when "status"
+  puts toggler.status
+else
   toggler.toggle!
 end
 
-puts toggler.error if toggler.error
-puts "Flash is currently enabled" if toggler.flash_on?
-puts "Flash is currently disabled" if toggler.flash_off?
+if toggler.error
+  puts toggler.error 
+else
+  puts "Done!"
+end
 

@@ -94,11 +94,28 @@ class TogglerTest < Test::Unit::TestCase
 
      toggler = Flashtoggle::Toggler.new("/Library", @backup_dir)
      toggler.toggle!
-
      assert_not_nil toggler.error
-     puts toggler.error
    end
   
+   def test_toggler_status_message_is_disabled_when_disabled
+
+     Flashtoggle::FLASH_PLUGIN_FILES.each do |f|
+       FileUtils.touch "#{@backup_dir}/#{f}"
+     end
+
+     toggler = Flashtoggle::Toggler.new(@plugins_dir, @backup_dir)
+     assert_equal "Flash is currently disabled", toggler.status
+   end
+   
+   def test_toggler_status_message_is_enabled_when_enabled
+
+     Flashtoggle::FLASH_PLUGIN_FILES.each do |f|
+       FileUtils.touch "#{@plugins_dir}/#{f}"
+     end
+
+     toggler = Flashtoggle::Toggler.new(@plugins_dir, @backup_dir)
+     assert_equal "Flash is currently enabled", toggler.status
+   end
   
 end
 

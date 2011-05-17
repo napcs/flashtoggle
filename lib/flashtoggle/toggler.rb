@@ -16,6 +16,10 @@ module Flashtoggle
       end
     end
         
+    def status
+      self.flash_on? ? "Flash is currently enabled" : "Flash is currently disabled"
+    end
+    
     def enable_flash!
       return if flash_on?
       begin
@@ -23,7 +27,7 @@ module Flashtoggle
           FileUtils.mv "#{self.backup_dir}/#{file}", "#{self.plugins_dir}/#{file}"
         end
       rescue Errno::EACCES => e
-        self.error = "You must run this script by using -  sudo flashtoggle on"
+        self.error = "You must run this script by using -  sudo flashtoggle [options]"
       rescue Errno::ENOENT => e
         self.error = "That folder can't be found"
       end
@@ -37,7 +41,7 @@ module Flashtoggle
           FileUtils.mv "#{self.plugins_dir}/#{file}", "#{self.backup_dir}/#{file}"
         end
       rescue Errno::EACCES => e
-        self.error = "You must run this script by using -  sudo flashtoggle off"
+        self.error = "You must run this script by using -  sudo flashtoggle [options]"
       rescue Errno::ENOENT => e
         self.error = "That folder can't be found"
       end
