@@ -15,8 +15,9 @@ task :install => :build do
   `gem install flashtoggle-#{Flashtoggle::VERSION}.gem`
 end
 
+desc "release gem to RubyGems.org"
 task :release => :build do
-  system "gem push flashtoggle-#{Flashtoggle::VERSION}"
+  system "gem push flashtoggle-#{Flashtoggle::VERSION}.gem"
 end
 
 
