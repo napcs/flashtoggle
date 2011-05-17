@@ -1,6 +1,13 @@
 #!/usr/bin/env ruby
 require 'flashtoggle'
 
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: flashtoggle on|off|status"  
+end.parse!
+
+
 command = ARGV[0]
 
 puts "FlashToggle #{Flashtoggle::VERSION}"
